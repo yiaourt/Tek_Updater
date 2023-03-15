@@ -1,0 +1,4 @@
+#pane{
+    -fx-background-color: rgb(7,6,7);
+    -fx-effect: innershadow(gaussian, black, 60, 0.5, 0, 0);
+}
