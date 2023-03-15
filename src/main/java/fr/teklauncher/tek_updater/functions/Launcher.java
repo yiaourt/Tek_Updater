@@ -74,13 +74,29 @@ public class Launcher {
                 alert.showAndWait();
             }
 
-        }else{
+        }else{ // Si le launcher existe, on le supprime, puis on le recréer pour faire la mise à jour proprement
 
-            // Si le launcher existe, on le supprime pour faire la mise à jour proprement
             try {
                 FileUtils.deleteDirectory(launcher_dir); // Supprime le dossier et tout son contenu
 
             } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Une erreur s'est produite : " + e.getMessage());
+                alert.showAndWait();
+            }
+
+            // On recréer le dossier launcher
+            String folderName = "launcher";
+
+            Path exePath = Paths.get(System.getProperty("java.home"), "bin", "java");
+            Path folderPath = Paths.get(exePath.getParent().toString(), folderName);
+
+            try {
+                Files.createDirectories(folderPath);
+
+            } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
                 alert.setHeaderText(null);

@@ -90,12 +90,23 @@ public class Main extends Application {
             // Le dossier existe, on vérifie que les fichiers sont à l'intérieur
             File[] fichiers = finalDirectory.listFiles();
 
-            if(fichiers == null){ // Si aucun fichiers n'est trouvé dans le dossier
+            boolean filesExist = false;
+
+            for (File fichier : fichiers) { // On viens vérifier dans cette boucle si des fichiers existe dans le dossier
+                if (fichier.exists()) {
+                    filesExist = true;
+                    break;
+                }
+            }
+
+            if(!filesExist){ // Si aucun fichiers n'est trouvé dans le dossier
+
                 // On télécharge l'archive de la dernière version du launcher
                 Launcher launcher = new Launcher();
                 launcher.updateLauncher(stage, progressLabel, progressBar);
 
             }else{ // Des fichiers existent on vérifie la version du fichier release
+
                 for (File fichier : fichiers) {
 
                     // On vérifie la version du fichier de release de Jlink
